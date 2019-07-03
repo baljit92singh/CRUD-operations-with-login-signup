@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete Post</h1>
+<div mat-dialog-content>
+    <p>Are you sure to delete this post?</p>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="deletePost()" cdkFocusInitial>DELETE</button>
+    <button mat-button (click)="onNoClick()">CANCEL</button>
+</div>

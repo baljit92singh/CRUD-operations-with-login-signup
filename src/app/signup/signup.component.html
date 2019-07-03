@@ -1,0 +1,28 @@
+<div class="main-div">
+    <mat-card>
+        <mat-card-title>Sign Up</mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="signUpForm" novalidate>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Enter user name" formControlName="userName">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Enter email" formControlName="email">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Enter password" formControlName="password">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Enter first name" formControlName="firstName">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Enter Last name" formControlName="lastName">
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" [disabled]="signUpForm.invalid" (click)="signUpData()">SIGNUP</button>
+            <button mat-raised-button color="primary" routerLink="/login">LOGIN</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
