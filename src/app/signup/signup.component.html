@@ -15,9 +15,6 @@
                     <mat-error *ngIf="f.userName.hasError('maxlength')">
                         Username must be maximum of 8 characters.
                     </mat-error>
-                    <!-- <mat-error *ngIf="f.userName.invalid && !f.userName.hasError('required')">
-                        Username must be Alphanumeric.
-                    </mat-error> -->
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Email</mat-label>
@@ -28,7 +25,7 @@
                     <mat-error *ngIf="f.email.hasError('maxlength')">
                         Email must be maximum of 50 characters.
                     </mat-error>
-                    <mat-error *ngIf="f.email.invalid">
+                    <mat-error *ngIf="f.email.invalid && f.email.value != ''">
                         Not a valid email.
                     </mat-error>
                 </mat-form-field>
