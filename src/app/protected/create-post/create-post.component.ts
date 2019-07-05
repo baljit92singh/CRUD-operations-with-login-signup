@@ -21,7 +21,7 @@ export class CreatePostComponent implements OnInit {
   }
   loadForm() {
     this.createPostForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9]+$')]],
+      title: ['', [Validators.required, Validators.maxLength(20)]],
       content: ['', [Validators.required, Validators.maxLength(250)]],
       status: ['', Validators.required]
     })
@@ -45,6 +45,15 @@ export class CreatePostComponent implements OnInit {
   onNoClick(data?): void {
     this.dialogRef.close(data);
   }
+
+  onlyAlphanumeric(event: any) {
+    const pattern = /[a-zA-Z0-9\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+  get f() { return this.createPostForm.controls; }
 
   ngOnInit() {
   }

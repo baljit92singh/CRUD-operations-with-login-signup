@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { CommonService } from '../common-service/common.service';
+import { CommonService } from '../protected/common-service/common.service';
 
 @Component({
   selector: 'app-login',
@@ -36,12 +36,14 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
         if (res.code === "200") {
           localStorage.setItem('token', JSON.stringify(res.token))
+          localStorage.setItem('currentUser', JSON.stringify(res))
           this.router.navigate(['/post-list']);
           this.snackBar.open(res.message, 'Dismiss', { duration: 3000 });
         } 
       });
   }
 
+  get f() { return this.loginForm.controls; }
   ngOnInit() {
   }
 

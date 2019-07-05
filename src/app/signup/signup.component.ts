@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { CommonService } from '../common-service/common.service';
+import { CommonService } from '../protected/common-service/common.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,9 +22,10 @@ export class SignupComponent implements OnInit {
   }
   loadForm() {
     this.signUpForm = this.fb.group({
+      // , Validators.pattern('^[a-zA-Z0-9 \'\-]+$')
       userName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(8)]],
-      password: ['', [Validators.required, Validators.maxLength(50)]],
-      email: ['', [Validators.email, Validators.required, Validators.minLength(8),]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      email: ['', [Validators.email, Validators.required, Validators.maxLength(50)]],
       firstName: ['', [Validators.required, Validators.maxLength(20)]],
       lastName: ['', [Validators.required, Validators.maxLength(20)]]
     })
@@ -42,8 +43,18 @@ export class SignupComponent implements OnInit {
       if (res.code === 200) {
         this.router.navigate(['/login']);
         this.snackBar.open(res.message, 'Dismiss', { duration: 3000 });
-      } 
+      }
     })
+  }
+
+  get f() { return this.signUpForm.controls; }
+
+  onlyAlphanumeric(event: any) {
+    const pattern = /[a-zA-Z0-9\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 
   ngOnInit() {

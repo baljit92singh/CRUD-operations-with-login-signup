@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Create Post</h1>
+<div mat-dialog-content>
+    <form [formGroup]="createPostForm" novalidate>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Title" (keypress)="onlyAlphanumeric($event)" formControlName="title" required>
+            <mat-error *ngIf="f.title.hasError('required')">
+                Title is required
+            </mat-error>
+            <mat-error *ngIf="f.title.hasError('maxlength')">
+                Title must be maximum of 50 characters.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Content" formControlName="content" required>
+            <mat-error *ngIf="f.content.hasError('required')">
+                Content is required
+            </mat-error>
+            <mat-error *ngIf="f.content.hasError('maxlength')">
+                Content must be maximum of 250 characters.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Select Status</mat-label>
+            <mat-select formControlName="status" required>
+                <mat-option *ngFor="let item of StatusList" [value]="item">
+                    {{item| titlecase}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.status.hasError('required')">
+                Status is required
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="createPostForm.invalid" (click)="createPost()" cdkFocusInitial>SAVE</button>
+    <button mat-button (click)="onNoClick()">CANCEL</button>
+</div>

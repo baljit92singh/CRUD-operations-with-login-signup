@@ -1,19 +1,29 @@
 <div class="main-div">
-    <mat-card>
+    <mat-card class="card-curve">
         <mat-card-title>Log In</mat-card-title>
         <mat-card-content>
             <form [formGroup]="loginForm" novalidate>
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Enter user name" formControlName="userName">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="userName" required>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <mat-error *ngIf="f.userName.hasError('required')">
+                        Username is required
+                    </mat-error>
                 </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Enter password" formControlName="password">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" required>
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <mat-error *ngIf="f.password.hasError('required')">
+                        Password is required
+                    </mat-error>
                 </mat-form-field>
             </form>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="loginData()">LOGIN</button>
-            <button mat-raised-button color="primary" routerLink="/sign-up">SIGNUP</button>
+            <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="loginData()">Login</button>
+            <button mat-raised-button color="primary" routerLink="/sign-up">Sing-up</button>
         </mat-card-actions>
     </mat-card>
 </div>

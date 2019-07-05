@@ -7,13 +7,15 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { CreatePostComponent } from './create-post/create-post.component';
-import { UpdatePostComponent } from './update-post/update-post.component';
-import { DeletePostComponent } from './delete-post/delete-post.component';
-import { ListPostComponent } from './list-post/list-post.component';
+import { CreatePostComponent } from './protected/create-post/create-post.component';
+import { UpdatePostComponent } from './protected/update-post/update-post.component';
+import { DeletePostComponent } from './protected/delete-post/delete-post.component';
+import { ListPostComponent } from './protected/list-post/list-post.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InterceptorService } from './interceptors/interceptor.service';
+import { HeaderComponent } from './protected/header/header.component';
+import { ProtectedComponent } from './protected/protected.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { InterceptorService } from './interceptors/interceptor.service';
     CreatePostComponent,
     UpdatePostComponent,
     DeletePostComponent,
-    ListPostComponent
+    ListPostComponent,
+    HeaderComponent,
+    ProtectedComponent
   ],
   imports: [
     BrowserModule,
