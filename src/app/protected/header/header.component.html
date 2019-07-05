@@ -1,6 +1,6 @@
 <mat-toolbar class="app-toolbar" color="primary">My Assignment
     <span class="example-spacer"></span>
-    <span>{{this.currentUser.user_firstname}} {{this.currentUser.user_lastname}}</span>
+    <span>{{this.currentUser.user_display_name}}</span>
     <!-- <button mat-button (click)="logout()">LOGOUT</button> -->
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>person</mat-icon>
@@ -8,7 +8,7 @@
     <mat-menu #menu="matMenu">
         <button mat-menu-item>
             <mat-icon>person</mat-icon>
-            <span>{{this.currentUser.user_firstname}} {{this.currentUser.user_lastname}}</span>
+            <span>{{this.currentUser.user_display_name}}</span>
         </button>
         <button mat-menu-item>
             <mat-icon>email</mat-icon>

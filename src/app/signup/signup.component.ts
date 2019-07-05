@@ -27,7 +27,8 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.email, Validators.required, Validators.maxLength(50)]],
       firstName: ['', [Validators.required, Validators.maxLength(20)]],
-      lastName: ['', [Validators.required, Validators.maxLength(20)]]
+      lastName: ['', [Validators.required, Validators.maxLength(20)]],
+      role: 'author'
     })
   }
   signUpData() {
@@ -37,14 +38,24 @@ export class SignupComponent implements OnInit {
       email: this.signUpForm.controls['email'].value,
       first_name: this.signUpForm.controls['firstName'].value,
       Last_name: this.signUpForm.controls['lastName'].value,
+      role: 'author'
     }
     console.log(item);
-    this.commonService.signup(item).subscribe(res => {
-      if (res.code === 200) {
-        this.router.navigate(['/login']);
-        this.snackBar.open(res.message, 'Dismiss', { duration: 3000 });
-      }
-    })
+    this.commonService.signup(item)
+      .subscribe(res => this.registerSuccess(res),
+        err => this.errorHandle(err))
+
+  }
+  registerSuccess(data) {
+    if (data.code === 200) {
+      this.router.navigate(['/login']);
+      this.snackBar.open(data.message, 'Dismiss', { duration: 3000 });
+    }
+  }
+
+  errorHandle(error) {
+    console.log(error.error.message)
+    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
   }
 
   get f() { return this.signUpForm.controls; }
