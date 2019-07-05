@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from '../common-service/common.service';
 
@@ -16,7 +16,8 @@ export class UpdatePostComponent implements OnInit {
     public dialogRef: MatDialogRef<UpdatePostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public fb: FormBuilder,
-    public commonService: CommonService) {
+    public commonService: CommonService,
+    public snackBar: MatSnackBar) {
     console.log(data)
     this.loadForm();
   }
@@ -35,12 +36,18 @@ export class UpdatePostComponent implements OnInit {
     }
     console.log(item);
     this.commonService.updatePost(this.data.id, item)
-      .subscribe(res => {
-        if (res) {
-          this.onNoClick(res)
-        }
-        console.log(res);
-      })
+      .subscribe(res => this.successResponse(res),
+        err => this.errorhandle(err)
+      )
+  }
+
+  successResponse(data) {
+    this.onNoClick(data)
+  }
+
+  errorhandle(error) {
+    console.log(error.error.message)
+    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
   }
 
   onNoClick(data?): void {

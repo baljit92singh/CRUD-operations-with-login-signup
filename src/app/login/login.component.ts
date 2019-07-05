@@ -33,16 +33,23 @@ export class LoginComponent implements OnInit {
     }
     console.log(item);
     this.commonService.login(item)
-      .subscribe(res => {
-        if (res.code === "200") {
-          localStorage.setItem('token', JSON.stringify(res.token))
-          localStorage.setItem('currentUser', JSON.stringify(res))
-          this.router.navigate(['/post-list']);
-          this.snackBar.open(res.message, 'Dismiss', { duration: 3000 });
-        } 
-      });
+      .subscribe(res => this.loginSuccess(res),
+        err => this.errorHandle(err))
+
+  }
+  loginSuccess(data) {
+    if (data.code === "200") {
+      localStorage.setItem('token', JSON.stringify(data.token))
+      localStorage.setItem('currentUser', JSON.stringify(data))
+      this.router.navigate(['/post-list']);
+      this.snackBar.open(data.message, 'Dismiss', { duration: 3000 });
+    }
   }
 
+  errorHandle(error) {
+    console.log(error.error.message)
+    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
+  }
   get f() { return this.loginForm.controls; }
   ngOnInit() {
   }

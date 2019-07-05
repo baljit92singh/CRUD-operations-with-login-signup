@@ -1,21 +1,24 @@
-<!-- <div class="main-div"> -->
-<mat-card>
-    <mat-list>
-        <h3 mat-subheader>Post Listing:
-            <span class="example-spacer"></span>
-            <button style="float: right" mat-raised-button color="primary" (click)="openAddDialog()">Add
-                Post</button>
-        </h3>
-        <mat-list-item *ngFor="let item of currentPostList">
-            <mat-divider></mat-divider>
-            <mat-icon mat-list-icon>assignment</mat-icon>
-            <h4 mat-line>Title: {{item.title.rendered}}</h4>
-            <p mat-line>Content: {{item.content.rendered}} </p>
-            <p mat-line>Status: {{item.status}} </p>
-            <mat-icon class="pointer" mat-list (click)="openEditDialog(item)" matTooltip="Edit Post">edit</mat-icon>
-            <mat-icon class="pointer" mat-list (click)="openDeleteDialog(item)" matTooltip="Delete Post">delete
-            </mat-icon>
-        </mat-list-item>
-    </mat-list>
-</mat-card>
-<!-- </div> -->
+<div class="main-div">
+    <mat-card>
+        <mat-list>
+            <h3 mat-subheader>Post Listing:
+                <span class="example-spacer"></span>
+                <button style="float: right" mat-raised-button color="primary" (click)="openAddDialog()">Add
+                    Post</button>
+            </h3>
+            <div class="scroll">
+                <mat-list-item *ngFor="let item of currentPostList">
+                    <mat-divider></mat-divider>
+                    <mat-icon mat-list-icon>assignment</mat-icon>
+                    <h4 mat-line>Title: {{item.title.rendered}}</h4>
+                    <p mat-line>Content: {{item.content.rendered}} </p>
+                    <p mat-line>Status: {{item.status}} </p>
+                    <mat-icon class="pointer" mat-list (click)="openEditDialog(item)" matTooltip="Edit Post">edit
+                    </mat-icon>
+                    <mat-icon class="pointer" mat-list (click)="openDeleteDialog(item)" matTooltip="Delete Post">delete
+                    </mat-icon>
+                </mat-list-item>
+            </div>
+        </mat-list>
+    </mat-card>
+</div>

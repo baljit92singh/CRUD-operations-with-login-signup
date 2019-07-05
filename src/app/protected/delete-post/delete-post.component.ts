@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { CommonService } from '../common-service/common.service';
 
 @Component({
@@ -12,7 +12,8 @@ export class DeletePostComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DeletePostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public commonService: CommonService) {
+    public commonService: CommonService,
+    public snackBar: MatSnackBar) {
     console.log(data)
   }
 
@@ -22,11 +23,18 @@ export class DeletePostComponent implements OnInit {
 
   deletePost() {
     this.commonService.deletePost(this.data.id)
-      .subscribe(res => {
-        if (res) {
-          this.onNoClick(res)
-        }
-      })
+      .subscribe(res => this.successResponse(res),
+        err => this.errorhandle(err)
+      )
+  }
+
+  successResponse(data) {
+    this.onNoClick(data)
+  }
+
+  errorhandle(error) {
+    console.log(error.error.message)
+    this.snackBar.open(error.error.message, 'Dismiss', { duration: 3000 });
   }
 
   ngOnInit() {
